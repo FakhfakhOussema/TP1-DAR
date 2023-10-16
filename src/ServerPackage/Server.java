@@ -21,9 +21,18 @@ public class Server
 		System.out.println("je suis un serveur en attente la connexion d'un client ");
 		socket = serversocket.accept();
 		System.out.println("un client est connecte ");
-	
+		
+		InputStream is = socket.getInputStream();
+		nb=is.read();
+		
+		int x = nb*5;
+		
+		OutputStream os =socket.getOutputStream(); 
+		os.write(x);
+		
 		}
-
+		
+		
 		catch(Exception e)
 		{
 			e.printStackTrace();

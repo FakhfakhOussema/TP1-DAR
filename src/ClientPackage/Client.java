@@ -22,6 +22,19 @@ public class Client
 		System.out.println("Je suis un client pas encore connecte ");
 		socket = new Socket(host,1234);
 		System.out.println("Je suis un client connecte ");
+		
+		Scanner val;
+		System.out.println("donner un entier ");
+		val= new Scanner(System.in);
+		int x =val.nextInt(); 
+		
+		OutputStream os = socket.getOutputStream();
+		os.write(x); 
+
+		InputStream is = socket.getInputStream();
+		int nb=is.read();
+		
+		System.out.println(x+"*5 egale a : " +nb);
 
 		}
 		catch (Exception e)
