@@ -14,30 +14,53 @@ public class Server
 		ServerSocket serversocket = null ;
 		Socket socket = null ;
 		int nb=0;
-		// TODO Auto-generated method stub
+		int choix=0;
+		int resultat ;
+
+		
 		try 
 		{
-		serversocket = new ServerSocket(1234);
-		System.out.println("je suis un serveur en attente la connexion d'un client ");
-		socket = serversocket.accept();
-		System.out.println("un client est connecte ");
+
+			serversocket = new ServerSocket(1234);
+			System.out.println("je suis un serveur en attente la connexion d'un client ");
+			socket = serversocket.accept();
+			System.out.println("un client est connecte ");	
+			InputStream is = socket.getInputStream();
+			OutputStream os = socket.getOutputStream();
+			nb=is.read();
+			choix=is.read();
 		
-		InputStream is = socket.getInputStream();
-		nb=is.read();
-		
-		int x = nb*5;
-		
-		OutputStream os =socket.getOutputStream(); 
-		os.write(x);
-		
+			switch (choix) 
+			{
+			case 1:
+
+				resultat = nb + 5;
+				os.write(resultat);
+				break;
+			case 2:
+				resultat = nb - 5;
+				os.write(resultat);
+				break;
+			case 3:
+				resultat = nb * 5;
+				os.write(resultat);
+				break;
+			case 4:
+				resultat = nb / 5;
+				os.write(resultat);
+				break;
+			default:
+				System.out.println("Return to Client.");
+		 }
+
+			socket.close();
 		}
-		
 		
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
 		
-		socket.close();
+		
 	}
 }
